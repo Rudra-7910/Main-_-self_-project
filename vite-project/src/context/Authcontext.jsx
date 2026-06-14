@@ -1,4 +1,4 @@
-import { useContext, createContext, useEffect, useState } from "react";
+import { useContext, createContext, useEffect, useState, useMemo } from "react";
 const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [isAuthenticated, setisAuthenticated] = useState({
@@ -17,9 +17,14 @@ const AuthProvider = ({ children }) => {
     }
     setLoading(false);
   }, [])
+  const contextValue = useMemo(() => ({
+    isAuthenticated,  
+    setisAuthenticated,  
+    loading, 
+  }), [isAuthenticated, loading])
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, setisAuthenticated, loading }}
+      value={contextValue}
     >
       {children}
     </AuthContext.Provider>
