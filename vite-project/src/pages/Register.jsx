@@ -4,24 +4,21 @@ import { useNavigate, Link } from "react-router-dom"
 import { useState } from "react"
 import Button from "../components/Button"
 import Input from "../components/Input"
-
 function Register() {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const navigate = useNavigate()
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
-
   const onSubmit = async (data) => {
     try {
-      setError("")
-      await registerUser(data)
+      setError("")     
+      await registerUser(data)           
       setSuccess("Registered! Redirecting to login...")
       setTimeout(() => navigate("/"), 1500)
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed")
     }
   }
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50">
       <form
@@ -75,7 +72,7 @@ function Register() {
             <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
           )}
         </div>
-        <Button variant="success" type="submit" className="w-full mt-5 rounded-2xl">
+        <Button type="submit" className="w-full mt-5 rounded-2xl bg-green-500 text-white hover:bg-green-600">
           Register
         </Button>
         <p className="text-sm text-center text-slate-500">
