@@ -13,11 +13,10 @@ function Login() {
   const { setisAuthenticated } = useAuth()
   const navigate = useNavigate()
   const [error, setError] = useState("")
-
   const onSubmit = async (data) => {
     try {
       setError("")
-      const res = await loginUser(data)
+      const res = await loginUser(data)   
       localStorage.setItem("accessToken", res.token)
       localStorage.setItem("user", res.user)
       setisAuthenticated({
@@ -29,7 +28,6 @@ function Login() {
       setError(err.response?.data?.message || "Login failed")
     }
   }
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100 px-4">
       <form
@@ -68,7 +66,7 @@ function Login() {
             <p className="text-red-400 text-sm mt-1">{errors.password.message}</p>
           )}
         </div>
-        <Button variant="success" type="submit" className="w-full rounded-2xl">
+        <Button type="submit" className="w-full rounded-2xl bg-green-500 text-white hover:bg-green-600">
           Login
         </Button>
         <p className="text-sm text-center text-slate-500">
