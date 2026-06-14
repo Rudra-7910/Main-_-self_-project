@@ -6,24 +6,20 @@ import PageHeader from "../components/PageHeader"
 import Card from "../components/Card"
 import Button from "../components/Button"
 import ThemeToggle from "../components/ThemeToggle"
-
 function Settings() {
   const { isAuthenticated, setisAuthenticated } = useAuth()
   const { theme } = useContext(ThemeContext)
   const dark = theme === "dark"
   const navigate = useNavigate()
-
   const handleLogout = () => {
     localStorage.removeItem("accessToken")
     localStorage.removeItem("user")
     setisAuthenticated({ user: null, accessToken: null })
     navigate("/")
   }
-
   return (
     <div>
       <PageHeader title="Settings" />
-
       <Card className={`max-w-md space-y-4 border ${dark ? "border-gray-700" : "border-slate-200"}`}>
         <div>
           <p className={`text-sm ${dark ? "text-gray-400" : "text-slate-500"}`}>Logged in as</p>
@@ -31,14 +27,10 @@ function Settings() {
             {isAuthenticated?.user || "User"}
           </p>
         </div>
-
         <hr className={dark ? "border-gray-700" : "border-slate-200"} />
-
         <ThemeToggle />
-
         <hr className={dark ? "border-gray-700" : "border-slate-200"} />
-
-        <Button variant="danger" onClick={handleLogout}>
+        <Button className="bg-red-500 text-white hover:bg-red-600 p-2 rounded-2xl" onClick={handleLogout}>
           Logout
         </Button>
       </Card>
